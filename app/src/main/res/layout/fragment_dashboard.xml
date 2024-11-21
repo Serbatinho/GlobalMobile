@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Texto da prévia do aplicativo -->
+    <TextView
+        android:id="@+id/textDashboardPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:visibility="gone" />
+
+    <!-- Botão para ir à tela de Edição de Sensores -->
+    <Button
+        android:id="@+id/buttonEditSensors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Editar Sensores"
+        android:visibility="gone" />
+
+    <!-- Botão para ir à tela de Cadastro de Sensores -->
+    <Button
+        android:id="@+id/buttonRegisterSensors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Cadastrar Sensores"
+        android:visibility="gone" />
+
+    <!-- Botão para ir à tela de Visualização de Sensores -->
+    <Button
+        android:id="@+id/buttonViewSensors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Visualizar Sensores"
+        android:visibility="gone" />
+</LinearLayout>

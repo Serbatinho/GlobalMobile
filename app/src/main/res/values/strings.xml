@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">global</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_forgot_password">Recuperar Senha</string>
+    <string name="send_reset_email">Enviar link de recuperação</string>
+    <string name="back_to_login">Voltar ao Login</string>
+    <string name="reset_email_sent">Link de recuperação enviado para %1$s</string>
+    <string name="reset_email_failed">Erro ao enviar link: %1$s</string>
+    <string name="dashboard_preview">
+    O SaveWatts permite monitorar e controlar o consumo de energia em sua residência. Cadastre seus sensores, visualize gráficos de consumo e receba alertas sobre possíveis falhas na instalação elétrica.
+</string>
+
+</resources>

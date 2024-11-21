@@ -5,6 +5,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Campo de CPF -->
+    <EditText
+        android:id="@+id/editTextCpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CPF"
+        android:inputType="number" />
+
+    <!-- Campo de E-mail -->
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
@@ -12,6 +21,7 @@
         android:hint="E-mail"
         android:inputType="textEmailAddress" />
 
+    <!-- Campo de Senha -->
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
@@ -19,6 +29,7 @@
         android:hint="Senha"
         android:inputType="textPassword" />
 
+    <!-- Botão de Login -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
@@ -26,6 +37,7 @@
         android:layout_marginTop="16dp"
         android:text="Entrar" />
 
+    <!-- Botão de Registro -->
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
@@ -33,6 +45,7 @@
         android:layout_marginTop="16dp"
         android:text="Registrar" />
 
+    <!-- Botão de Esqueci Minha Senha -->
     <Button
         android:id="@+id/buttonForgotPassword"
         android:layout_width="match_parent"
@@ -40,6 +53,7 @@
         android:layout_marginTop="16dp"
         android:text="Esqueci minha senha" />
 
+    <!-- Botão de Voltar para Home -->
     <Button
         android:id="@+id/buttonBackToHome"
         android:layout_width="match_parent"

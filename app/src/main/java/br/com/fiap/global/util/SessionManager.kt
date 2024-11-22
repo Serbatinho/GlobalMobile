@@ -39,6 +39,10 @@ class SessionManager(context: Context) {
         return userDetails
     }
 
+    fun getSessionToken(): String? {
+        return prefs.getString("session_token", null)
+    }
+
     fun clearSession() {
         prefs.edit().clear().apply()
     }

@@ -14,6 +14,21 @@
         android:textAlignment="center"
         android:layout_marginBottom="16dp" />
 
+    <EditText
+        android:id="@+id/editTextSensorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Sensor"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/buttonRegisterSensor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar Sensor"
+        android:layout_marginBottom="16dp" />
+
     <Button
         android:id="@+id/buttonBackToDashboard"
         android:layout_width="match_parent"

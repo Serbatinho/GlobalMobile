@@ -11,20 +11,26 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/textViewSensors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Visualização de Sensores"
+            android:text="Sensores Cadastrados"
             android:textSize="20sp"
             android:textAlignment="center"
             android:layout_marginBottom="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSensors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/buttonBackToDashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Voltar" />
+            android:text="Voltar para Dashboard" />
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

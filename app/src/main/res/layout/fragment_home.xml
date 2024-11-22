@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/background_green"
     tools:context=".ui.home.HomeFragment">
 
     <!-- Texto da proposta do app -->
@@ -13,9 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@drawable/text_background"
         android:text="O app analisa o consumo de todas as fontes de energia na sua casa, com gasto, gasto médio esperado e muito mais!"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:textColor="@color/text_green"
         android:visibility="gone" />
 
     <!-- Mensagem de boas-vindas -->
@@ -24,8 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@drawable/text_background"
         android:textAlignment="center"
         android:textSize="18sp"
+        android:textColor="@color/text_green"
         android:visibility="gone" />
 
     <!-- Botão para ir para login -->
@@ -34,6 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button_green"
+        android:textColor="@color/white"
         android:text="Ir para Login" />
 
     <!-- Botão de logout -->
@@ -42,6 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button_green"
+        android:textColor="@color/white"
         android:text="Logout"
         android:visibility="gone" />
 </LinearLayout>

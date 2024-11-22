@@ -11,16 +11,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.fiap.global.R
 import br.com.fiap.global.databinding.FragmentViewSensorsBinding
+import br.com.fiap.global.models.Measure
 import br.com.fiap.global.models.Sensor
 import br.com.fiap.global.util.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
 import org.json.JSONObject
-
 
 class ViewSensorsFragment : Fragment() {
 
@@ -42,7 +45,14 @@ class ViewSensorsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sessionManager = SessionManager(requireContext())
-        adapter = SensorsAdapter()
+
+        adapter = SensorsAdapter { sensor: Sensor ->
+            val bundle = Bundle().apply {
+                putInt("sensorId", sensor.id)
+                putString("sensorName", sensor.nome)
+            }
+            findNavController().navigate(R.id.navigation_edit_sensors, bundle)
+        }
 
         binding.recyclerViewSensors.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewSensors.adapter = adapter
@@ -78,11 +88,10 @@ class ViewSensorsFragment : Fragment() {
                             nome = sensorJson.getString("nome"),
                             proprietario = sensorJson.getString("proprietario")
                         )
-                        sensors.add(sensor)
-                    }
 
-                    sensors.forEach { sensor ->
-                        println("Sensor carregado: ID=${sensor.id}, Nome=${sensor.nome}, Proprietário=${sensor.proprietario}")
+                        sensor.medidas = fetchSensorMeasures(sensor.id)
+
+                        sensors.add(sensor)
                     }
 
                     withContext(Dispatchers.Main) {
@@ -90,20 +99,54 @@ class ViewSensorsFragment : Fragment() {
                         Toast.makeText(requireContext(), "Sensores carregados com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    val errorBody = response.body?.string()
-                    println("Erro ao carregar sensores. Código: ${response.code}, Mensagem: ${response.message}, Corpo: $errorBody")
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Erro ao carregar sensores: ${response.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             } catch (e: Exception) {
-                println("Erro de conexão: ${e.message}")
                 withContext(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Erro de conexão: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
+
+    private fun fetchSensorMeasures(sensorId: Int): List<Measure> {
+        val medidas = mutableListOf<Measure>()
+        try {
+            val url = "http://10.0.2.2:8080/sensores/$sensorId/medidas?page=0&size=10"
+            val request = Request.Builder()
+                .url(url)
+                .header("Authorization", "Bearer ${sessionManager.getSessionToken()}")
+                .get()
+                .build()
+
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                val responseBody = response.body?.string()
+                println("Resposta da API: $responseBody") // Debug para verificar a resposta
+                val jsonObject = JSONObject(responseBody ?: "")
+                val contentArray = jsonObject.getJSONArray("content")
+                for (i in 0 until contentArray.length()) {
+                    val medidaJson = contentArray.getJSONObject(i)
+                    val medida = Measure(
+                        valorCorrente = medidaJson.optInt("valorCorrente", 0), // Valor padrão se não existir
+                        valorTensao = medidaJson.optInt("valorTensao", 0), // Valor padrão se não existir
+                        valorTemperatura = medidaJson.optInt("valorTemperatura", 0) // Valor padrão se não existir
+                    )
+                    medidas.add(medida)
+                }
+            } else {
+                println("Erro na resposta do endpoint medidas: Código ${response.code}, Corpo: ${response.body?.string()}")
+            }
+        } catch (e: Exception) {
+            println("Erro ao buscar medidas para Sensor ID $sensorId: ${e.message}")
+        }
+        return medidas
+    }
+
+
+
 
 
 

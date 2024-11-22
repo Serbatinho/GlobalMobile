@@ -82,6 +82,20 @@
         android:id="@+id/navigation_view_sensors"
         android:name="br.com.fiap.global.ui.sensors.ViewSensorsFragment"
         android:label="Visualizar Sensores"
-        tools:layout="@layout/fragment_view_sensors" />
+        tools:layout="@layout/fragment_view_sensors">
+        <action
+            android:id="@+id/action_view_sensors_to_edit_sensors"
+            app:destination="@id/navigation_edit_sensors">
+            <argument
+                android:name="sensorId"
+                app:argType="integer" />
+            <argument
+                android:name="sensorName"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+
+
 
 </navigation>

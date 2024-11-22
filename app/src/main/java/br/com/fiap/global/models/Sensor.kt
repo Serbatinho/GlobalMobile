@@ -3,5 +3,6 @@ package br.com.fiap.global.models
 data class Sensor(
     val id: Int,
     val nome: String,
-    val proprietario: String
+    val proprietario: String,
+    var medidas: List<Measure> = emptyList()
 )

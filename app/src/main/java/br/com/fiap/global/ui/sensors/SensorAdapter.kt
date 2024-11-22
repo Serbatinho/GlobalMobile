@@ -1,4 +1,5 @@
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -6,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.global.databinding.ItemSensorBinding
 import br.com.fiap.global.models.Sensor
 
-class SensorsAdapter : ListAdapter<Sensor, SensorsAdapter.SensorViewHolder>(SensorDiffCallback()) {
+class SensorsAdapter(private val onEditClick: (Sensor) -> Unit) :
+    ListAdapter<Sensor, SensorsAdapter.SensorViewHolder>(SensorDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SensorViewHolder {
         val binding = ItemSensorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SensorViewHolder(binding)
+        return SensorViewHolder(binding, onEditClick)
     }
 
     override fun onBindViewHolder(holder: SensorViewHolder, position: Int) {
@@ -21,11 +23,31 @@ class SensorsAdapter : ListAdapter<Sensor, SensorsAdapter.SensorViewHolder>(Sens
         submitList(sensors)
     }
 
-    class SensorViewHolder(private val binding: ItemSensorBinding) : RecyclerView.ViewHolder(binding.root) {
+    class SensorViewHolder(
+        private val binding: ItemSensorBinding,
+        private val onEditClick: (Sensor) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(sensor: Sensor) {
+            // Exibe o nome e o proprietário do sensor
             binding.textSensorName.text = sensor.nome
             binding.textSensorOwner.text = sensor.proprietario
 
+            // Exibe as medidas, se houver
+            if (sensor.medidas.isNotEmpty()) {
+                val medidasText = sensor.medidas.joinToString(separator = "\n") {
+                    "Corrente: ${it.valorCorrente}A | Tensão: ${it.valorTensao}V | Temp: ${it.valorTemperatura}°C"
+                }
+                binding.textSensorMeasures.text = medidasText
+                binding.textSensorMeasures.visibility = View.VISIBLE
+            } else {
+                binding.textSensorMeasures.visibility = View.GONE
+            }
+
+            // Configura o botão de editar
+            binding.buttonEditSensor.setOnClickListener {
+                onEditClick(sensor)
+            }
         }
     }
 }

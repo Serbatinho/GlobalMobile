@@ -1,22 +1,47 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textEditSensors"
+    <EditText
+        android:id="@+id/editTextSensorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edição de Sensores"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_marginBottom="16dp" />
+        android:hint="Nome do Sensor" />
+
+    <EditText
+        android:id="@+id/editTextValorCorrente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor Corrente"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextValorTensao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor Tensão"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextValorTemperatura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor Temperatura"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/buttonSaveSensor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar" />
 
     <Button
         android:id="@+id/buttonBackToDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Voltar" />
+
 </LinearLayout>
